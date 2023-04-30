@@ -2,6 +2,8 @@ const container = document.querySelector(".pictures");
 const tmpPicture = document.getElementById("picture");
 const thumbnailsFragment = new DocumentFragment();
 
+
+
 export function thumbnails(thumbs){
   thumbs.forEach((thumb=> createThumb(thumb)));
   container.append(thumbnailsFragment);
@@ -15,9 +17,6 @@ function createThumb(data) {
   const commentsCounter = tmpPictureClone.querySelector(".picture__comments");
 
   linkTag.dataset.picid = data.id;
-  imageTag.src = data.url;
-  imageTag.style.filter = data.cssFilter;
-  likesBox.innerText = data.likes;
-  commentsCounter.innerText = data.comments.length;
+  imageTag.src = data.photo; 
   thumbnailsFragment.append(tmpPictureClone);
 }
