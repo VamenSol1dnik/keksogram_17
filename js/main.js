@@ -1,6 +1,8 @@
 import { thumbnails } from './picture.js';
 import { openBigImage } from './fullscreen.js';
 import {onPhotoUpload} from "./validation.js";
+import { createSlider } from "./no-ui-slider.js";
+import { uploadImageZoom } from "./no-ui-slider.js";
 
 fetch("http://localhost:4000/photos")
   .then((response) => response.json())
@@ -19,3 +21,6 @@ fetch("http://localhost:4000/photos")
   
   const photoInput = document.querySelector('#upload-file');
   photoInput.addEventListener('change', onPhotoUpload);
+  
+createSlider();
+uploadImageZoom()

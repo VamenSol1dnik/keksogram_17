@@ -21,5 +21,8 @@
     "npm": "6.x"
   },
   "main": "index.js",
-  "author": "Valeron"
+  "author": "Valeron",
+  "dependencies": {
+    "nouislider": "^15.7.0"
+  }
 }
