@@ -1,54 +1,66 @@
-const bigImageBox = document.querySelector(".big-picture");
-const images = document.querySelector(".images");
-const close = document.querySelector(".big-picture_close");
+const btnCloseLightbox = document.querySelector("#picture-cancel");
+const btnLike = document.querySelector(".likes-count");
+const commentsCounter = document.querySelector(".comments-count");
+const commentsShown = document.querySelector(".comments-shown");
+const commentsParent = document.querySelector(".social__comments");
+const photoPostAuthor = document.querySelector(".social__picture");
+const photoDescription = document.querySelector(".social__caption");
 
-export function showFullScreen(dataArray) {
-    pictures.addEventListener ("click", (event) => {
-        const postID = event.target.dataset.id - 1;
-        let commentsHTML = "";
 
-        document.body.classList.add("modal-open");
-        bigImageBox 
-            .querySelector(".social_comment-count")
-            .classList.add("hidden");
+export function openBigImage(target, posts){
+  const id = Number(target.dataset.picid);
 
-            if (!isNaN(postID)) {
-                bigImageBox.classList.remove("hidden");
-            
-                console.log(dataArray[postID]);
-                bigImageBox.querySelector(".big-image_img img").src =
-                    dataArray[postID].url;
-                bigImageBox.querySelector(".social_caption").innerText =
-                    dataArray[postID].description;
-                bigImageBox.querySelector(".big-image_img img").src =
-                    dataArray[postID].likes;
-                bigImageBox.querySelector(".big-image_img img").src =
-                    dataArray[postID].comments.length;
+  lightbox.classList.remove("hidden");
+  toggleBodyScroll("noscroll");
 
-                dataArray[postID].comments.forEach( (comment) =>{
-                    commentsHTML += `
-                    `
-                });
+  const postData = posts.find(post => post.id === id);
+  bigImg.src = postData.url;
 
-                bigImageBox.querySelector(".social_comments").innerHTML = commentsHTML;
-            }
-    });
+  photoPostAuthor.src = postData.avatar;
+  photoDescription.innerText = postData.description;
+  btnLike.innerText = postData.likes;
+  commentsCounter.innerText = postData.comments.length;
+  commentsShown.innerText = postData.comments.length;
 
-    close.addEventListener("click", () => {
-        bigImageBox.classList.add("hidden");
-        document.body.classList.remove("modal-open");
-            bigImageBox
-                .querySelector(".social_comment-count")
-                .classList.remove("hidden");
-    });
+  const socialComment = document.querySelector(".social__comment");
 
-    document.addEventListener("keyup", (evt) => {
-        if (evt.key === "Escape") {
-            bigImageBox.classList.add("hidden");
-            document.body.classList.remove("modal-open");
-            bigImageBox
-            .querySelector("social_comment-count")
-            .classList.remove("hidden");            
-        }
-    });
+  const commentsFragment = new DocumentFragment();
+
+  postData.comments.forEach(comment => {
+    let tmpSocialComment = socialComment.cloneNode(true);
+
+    tmpSocialComment.querySelector(".social__author").innerText = comment.name;
+    tmpSocialComment.querySelector(".social__text").innerText = comment.message;
+    tmpSocialComment.querySelector(".social__picture").src = comment.avatar;
+
+    commentsFragment.append(tmpSocialComment);
+  })
+
+  commentsParent.innerHTML = '';
+  commentsParent.append(commentsFragment);
+
+  btnCloseLightbox.addEventListener("click", closeBigImage);
+
+  document.addEventListener("keydown", escBtn);
+}
+
+function escBtn(event){
+  if (event.keyCode === 27) {
+    closeBigImage();
+  }
+}
+function closeBigImage(){
+  lightbox.classList.add("hidden");
+  toggleBodyScroll('scroll');
+  document.removeEventListener("keydown", escBtn);
+}
+function toggleBodyScroll(state) {
+  if (state === "scroll") {
+    const body = document.querySelector("body");
+    body.classList.remove("modal-open");
+  }
+  else if (state === "noscroll") {
+    const body = document.querySelector("body");
+    body.classList.add("modal-open");
+  }
 }
