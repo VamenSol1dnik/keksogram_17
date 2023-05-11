@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <title>Ram</title>
+  <title>MakrOGram</title>
 </head>
 
 <body class="body">
@@ -18,8 +18,8 @@
     <section class="img-filters  img-filters--inactive  container">
       <h2 class="img-filters__title  visually-hidden">Фільтр фотографій</h2>
       <form class="img-filters__form" action="index.html" method="get" autocomplete="off">
-        <button type=button class="img-filters__button  img-filters__button--active" id="filter-default">За замовчуванням</button>
-        <button type=button class="img-filters__button" id="filter-random">Віпадкові</button>
+        <button type=button class="img-filters__button  img-filters__button--active" id="filter-default">Всі фото</button>
+        <button type=button class="img-filters__button" id="filter-random">Випадкові</button>
         <button type=button class="img-filters__button" id="filter-discussed">Популярні</button>
       </form>
     </section>
@@ -60,7 +60,7 @@
                   <!-- Зміна глибини ефекту, що накладається на зображення-->
                   <fieldset class="img-upload__effect-level  effect-level">
                     <input class="effect-level__value" type="number" step="any" name="effect-level" value="">
-                    <div class="effect-level__slider"></div>
+                    <div class="effect-level__slider"><div id="slider"></div></div>
                   </fieldset>
 
                   <!-- Кнопка для закриття форми редагування зображення -->
@@ -73,42 +73,42 @@
                     <li class="effects__item">
                       <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-none" value="none" checked>
                       <label for="effect-none" class="effects__label">
-                        <span class="effects__preview  effects__preview--none">Превью фото без кфекту</span>
+                        <span class="effects__preview  effects__preview--none">Прев'ю фото без ефекту</span>
                         Оригінал
                       </label>
                     </li>
                     <li class="effects__item">
                       <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-chrome" value="chrome">
                       <label for="effect-chrome" class="effects__label">
-                        <span class="effects__preview  effects__preview--chrome">Превью ефекту Хром</span>
+                        <span class="effects__preview  effects__preview--chrome">Прев'ю ефекту Хром</span>
                         Хром
                       </label>
                     </li>
                     <li class="effects__item">
                       <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-sepia" value="sepia">
                       <label for="effect-sepia" class="effects__label">
-                        <span class="effects__preview  effects__preview--sepia">Превью ефекту Сепія</span>
+                        <span class="effects__preview  effects__preview--sepia">Прев'ю ефекту Сепія</span>
                         Сепія
                       </label>
                     </li>
                     <li class="effects__item">
                       <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-marvin" value="marvin">
                       <label for="effect-marvin" class="effects__label">
-                        <span class="effects__preview  effects__preview--marvin">Превью ефекту Марвін</span>
+                        <span class="effects__preview  effects__preview--marvin">Прев'ю ефекту Марвін</span>
                         Марвін
                       </label>
                     </li>
                     <li class="effects__item">
                       <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-phobos" value="phobos">
                       <label for="effect-phobos" class="effects__label">
-                        <span class="effects__preview  effects__preview--phobos">Превью ефекту Фобос</span>
+                        <span class="effects__preview  effects__preview--phobos">Прев'ю ефекту Фобос</span>
                         Фобос
                       </label>
                     </li>
                     <li class="effects__item">
                       <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-heat" value="heat">
                       <label for="effect-heat" class="effects__label">
-                        <span class="effects__preview  effects__preview--heat">Превью ефекту Зной</span>
+                        <span class="effects__preview  effects__preview--heat">Прев'ю ефекту Зной</span>
                         Зной
                       </label>
                     </li>
@@ -117,8 +117,8 @@
 
                 <!-- Додавання хеш-тегів та коментаря до зображення -->
                 <fieldset class="img-upload__text text">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" required>
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."  maxlength="140" ></textarea>
+                  <input class="text__hashtags" name="hashtags" placeholder="#ХешТег" required>
+                  <textarea class="text__description" name="description" placeholder="Ваш комментар..."  maxlength="160" ></textarea>
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
@@ -147,20 +147,19 @@
         <div class="big-picture__social  social">
           <div class="social__header">
             <img class="social__picture" src="img/avatar-1.svg" alt="Аватар автора фотографии" width="35" height="35">
-            <p class="social__caption">Тестим новую камеру! =)</p>
+            <p class="social__caption">Тестуємо нову камеру! =)</p>
             <p class="social__likes">Нравится <span class="likes-count">356</span></p>
           </div>
 
           <!-- Коментарі до зображення-->
-          <div class="social__comment-count">5 из <span class="comments-count">125</span> комментарів</div>
+          <div class="social__comment-count"><span class="comments-shown">5</span> з <span class="comments-count">125</span> комментарів</div>
           <ul class="social__comments">
             <li class="social__comment">
               <img class="social__picture" src="img/avatar-4.svg" alt="Аватар на коментарі фотографії" width="35" height="35">
-              <p class="social__text">Мега фото! Просто очманіти. Як вам так удалося?</p>
-            </li>
-            <li class="social__comment">
-              <img class="social__picture" src="img/avatar-3.svg" alt="Аватар на коментарі фотографії" width="35" height="35">
-               <p class="social__text">Так це фотошоп!!!!!!!!</p>
+              <div>
+                <p class="social__author"></p>
+                <p class="social__text">Мега фото! Просто очманіти. Як вам так удалося?</p>
+              </div>
             </li>
           </ul>
 
