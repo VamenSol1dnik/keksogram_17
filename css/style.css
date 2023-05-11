@@ -192,13 +192,15 @@ main {
    ========================================================================== */
 
 .pictures {
+  position: relative;
   display: -ms-grid;
   display: grid;
   grid-gap: 10px;
 
-  -ms-grid-columns: (1fr)[7];
+  -ms-grid-columns: (1fr)7;
       grid-template-columns: repeat(7, 1fr);
 }
+
 
 .picture {
   position: relative;
@@ -313,6 +315,7 @@ main {
 
   margin: 0;
   padding: 0;
+  height: 569px;
   min-height: 569px;
 
   background-image: url("../img/logo-mask.png");
@@ -324,48 +327,31 @@ main {
 
 .img-upload__label {
   position: absolute;
+  display: block;
+  outline: none !important;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  top: 194px;
-  left: 203px;
-
-  width: 180px;
-  height: 181px;
+  width: 260px;
+  height: 50px;
 
   font-size: 0;
-
-  background-image: url("../img/upload-button-bg.png");
-  background-repeat: no-repeat;
-  background-position: center;
-
-  cursor: pointer;
-}
-
-.img-upload__label::after {
-  content: "";
-  position: absolute;
-
-  top: 32px;
-  left: 47px;
-
-  width: 86px;
-  height: 114px;
 
   background-image: url("../img/upload-button.svg");
   background-repeat: no-repeat;
   background-position: center;
 
-  -webkit-filter: drop-shadow(0 0 10px #943106);
-          filter: drop-shadow(0 0 10px #943106);
+  -webkit-filter: drop-shadow(0 0 10px #ff28fa33);
+  filter: drop-shadow(0 0 10px #ff28fa33);
+  transition: .2s;
+
+  cursor: pointer;
 }
 
-.img-upload__label:hover::after,
-.img-upload__label:active::after {
-  -webkit-filter: drop-shadow(0 0 10px #622104);
-          filter: drop-shadow(0 0 10px #622104);
-
-  -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1);
+.img-upload__label:hover {
+  -webkit-filter: drop-shadow(0 0 14px #ff28faff);
+  filter: drop-shadow(0 0 14px #ff28faff);
 }
 
 .img-upload__input:focus + .img-upload__label {
@@ -1083,9 +1069,9 @@ main {
    ========================================================================== */
 
 .page-footer {
-  margin-top: 30px;
-  padding-top: 30px;
-  border-top: solid 1px #cccccc;
+  position: relative;
+  margin-top: 12px;
+  padding-bottom: 12px;
 }
 
 .page-footer__wrapper {
@@ -1400,7 +1386,7 @@ main {
   }
 
   .pictures {
-    -ms-grid-columns: (1fr)[5];
+    -ms-grid-columns: (1fr)5;
     grid-template-columns: repeat(5, 1fr);
   }
 
@@ -1421,7 +1407,7 @@ main {
   }
 
   .pictures {
-    -ms-grid-columns: (1fr)[3];
+    -ms-grid-columns: (1fr)3;
     grid-template-columns: repeat(3, 1fr);
   }
 
