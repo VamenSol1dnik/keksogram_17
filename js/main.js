@@ -1,9 +1,10 @@
 import { thumbnails } from './picture.js';
 import { openBigImage } from './fullscreen.js';
-import {onPhotoUpload} from "./validation.js";
-import { createSlider } from "./no-ui-slider.js";
+import {closeUploadPopup, onPhotoUpload} from "./validation.js";
+import { createSlider, formSubmit} from "./no-ui-slider.js";
 import { uploadImageZoom } from "./no-ui-slider.js";
 
+let posts = [];
 fetch("http://localhost:4000/photos")
   .then((response) => response.json())
   .then((data) => {
@@ -24,3 +25,17 @@ fetch("http://localhost:4000/photos")
   
 createSlider();
 uploadImageZoom()
+
+const submitImageForm = document.querySelector('#upload-select-image');
+submitImageForm.addEventListener("submit", submitNewImage);
+async function submitNewImage(event){
+  event.preventDefault();
+
+  let newImageData = await formSubmit();
+  posts.push(newImageData);
+
+  const newThumbnails = [newImageData];
+  thumbnails(newThumbnails);
+  closeUploadPopup();
+
+}
