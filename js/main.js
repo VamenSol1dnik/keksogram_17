@@ -1,8 +1,11 @@
 import { thumbnails } from './picture.js';
 import { openBigImage } from './fullscreen.js';
 import {closeUploadPopup, onPhotoUpload} from "./validation.js";
+
 import { createSlider, formSubmit} from "./no-ui-slider.js";
 import { uploadImageZoom } from "./no-ui-slider.js";
+
+import {applyFilter} from "./filter.js";
 
 let posts = [];
 fetch("http://localhost:4000/photos")
@@ -11,6 +14,10 @@ fetch("http://localhost:4000/photos")
     posts = data;
     thumbnails(posts);
   });
+
+  const filters = document.querySelector(".img-filters");
+filters.classList.remove('img-filters--inactive');
+
 
   const container = document.querySelector(".pictures");
   container.addEventListener('click', function(event) {
@@ -38,4 +45,24 @@ async function submitNewImage(event){
   thumbnails(newThumbnails);
   closeUploadPopup();
 
+}
+
+const debounce = (func, wait) => {
+  let debounceTimer
+  return function() {
+    const context = this
+    const args = arguments
+    clearTimeout(debounceTimer)
+    debounceTimer
+      = setTimeout(() => func.apply(context, args), wait)
+  }
+}
+
+const filtersParent = document.querySelector(".img-filters__form");
+
+filtersParent.addEventListener('click', debounce(listenFilter, 500));
+
+function listenFilter(event){
+  let filteredPosts = applyFilter(event, posts);
+  thumbnails(filteredPosts);
 }
