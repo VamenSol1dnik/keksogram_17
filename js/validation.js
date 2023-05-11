@@ -1,3 +1,4 @@
+import { resetSlider } from "./no-ui-slider";
 const uploadPopup = document.querySelector('.img-upload__overlay');
 const uploadPopupClose = document.querySelector('#upload-cancel');
 const body = document.querySelector('body');
@@ -37,7 +38,7 @@ function disablePopupEscBtn(){
   document.removeEventListener("keydown", escBtn);
 }
 
-function closeUploadPopup() {
+export function closeUploadPopup() {
   uploadPopup.classList.add('hidden');
   uploadPopupClose.removeEventListener('click', closeUploadPopup);
   body.classList.remove('modal-open');
@@ -53,6 +54,9 @@ function closeUploadPopup() {
   tagInput.removeEventListener('input', checkTag);
   commentInput.removeEventListener('input', checkComment);
 }
+
+resetSlider();
+uploadPopup.style.filter = '';
 
 function checkTag(){
   tagInput.setCustomValidity('');

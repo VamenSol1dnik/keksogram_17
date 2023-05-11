@@ -10,4 +10,14 @@ function createThumb(data) {
 const container = document.querySelector(".pictures");
 const tmpPicture = document.getElementById("picture");
 const thumbnailsFragment = new DocumentFragment();
+const imageTag = tmpPictureClone.querySelector(".picture__img");
+  const likesBox = tmpPictureClone.querySelector(".picture__likes");
+  const commentsCounter = tmpPictureClone.querySelector(".picture__comments");
+
+  linkTag.dataset.picid = data.id;
+  imageTag.src = data.url;
+  imageTag.style.filter = data.cssFilter;
+  likesBox.innerText = data.likes;
+  commentsCounter.innerText = data.comments.length;
+  thumbnailsFragment.append(tmpPictureClone);
 }
